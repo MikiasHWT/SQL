@@ -92,15 +92,6 @@ SELECT *
 FROM city
 WHERE CountryCode = 'ERI';
 
-SELECT *
-FROM city;
-
-SELECT *
-FROM countrylanguage;
-
-SELECT *
-FROM country;
-
 -- Official languages
 SELECT *
 FROM countrylanguage
@@ -152,12 +143,6 @@ FROM CountryCap
 JOIN PrimLanguage
 	ON `Code` = CountryCode;
 
-SELECT *
-FROM countrylanguage
-WHERE IsOfficial = 'T';
-
-SELECT *
-FROM country;
 
 
 
