@@ -590,28 +590,64 @@ DELIMITER ;
 -- for troubleshooting
 SHOW VARIABLES LIKE 'event%';
 
+-- ####################################################################################################################
+
+-- Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). 
+-- If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically. 
+
+WITH CityLengths AS (
+    SELECT CITY, LENGTH(CITY) AS name_length,
+           ROW_NUMBER() OVER (ORDER BY LENGTH(CITY), CITY) AS shortest_city,
+           ROW_NUMBER() OVER (ORDER BY LENGTH(CITY) DESC, CITY) AS longest_city
+    FROM STATION
+)
+SELECT CITY, name_length
+FROM CityLengths
+WHERE shortest_city = 1 OR longest_city = 1;
 
 
+-- ####################################################################################################################
 
+-- Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
 
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY LIKE 'A%' 
+   OR CITY LIKE 'E%' 
+   OR CITY LIKE 'I%' 
+   OR CITY LIKE 'O%' 
+   OR CITY LIKE 'U%';
 
+-- ####################################################################################################################
 
+-- Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
 
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY REGEXP '^[AEIOU].*[AEIOU]$';
 
+-- Regular Expression Matching: REGEXP (or RLIKE in some systems) uses a regular expression to match patterns. In this case:
+-- ^ ensures that the string starts with a vowel ([AEIOU]).
+-- .* allows any characters (zero or more) between the first and last character.
+-- $ ensures that the string ends with a vowel ([AEIOU]).
 
+-- ####################################################################################################################
 
+-- Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
 
+SELECT DISTINCT City
+FROM Station
+WHERE CITY NOT REGEXP '^[AEIOU]'; 
 
+-- ####################################################################################################################
 
+-- Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
 
+SELECT DISTINCT City
+FROM Station
+WHERE City NOT REGEXP '[AEIOU]$';
 
-
-
-
-
-
-
-
+-- ####################################################################################################################
 
 
 
