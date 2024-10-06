@@ -1,2 +1,2 @@
 # SQL Practice
- SQL Introductory Practice
+ SQL Practice
