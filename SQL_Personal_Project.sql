@@ -1,4 +1,4 @@
-
+-- Geographics Data Exploration
 -- Inspect City data
 SELECT *
 FROM city;
